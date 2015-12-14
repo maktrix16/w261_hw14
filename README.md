@@ -8,7 +8,7 @@ HW14 Consolidation - no one doing this yet, arthur can start.
 
 ##Who is working on what
 Anant - working on 14.4 (implemented GBDT on local)  
-Arthur - working on 14.4 (putting Anant/Marguerite's GBDT code into AWS)  
+Arthur - working on 14.4 (converted Marguerite's GBDT code into AWS with small data set)  
 Doug - completed 14.2  
 Kasane - working on 14.3/14.4  
 James - working on 14.4 (implemented FFM on cloud); completed hw14.3  
