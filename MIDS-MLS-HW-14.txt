@@ -1,0 +1,151 @@
+===========================================================================
+===MIDS UC Berkeley, Machine Learning at Scale DATSCI W261 ASSIGNMENT #13===
+-----------------------
+V1.0 Final 12/09/2015  HW14
+-----------------------
+SPECIAL INSTURCTIONS: This can be an individual or group homework 
+
+
+====================================================
+===  HW14.1 Please resubmit HW13 (HW13.1 - HW13.5)
+Please resubmit HW13 (HW13.1 - HW13.5). Dont forget to explore different numbers of hash buckets! What is a good number of hash buckets
+
+
+====================================================
+===  HW14.2  AB Test: Testing Significance
+
+Assume the following scenario: given a control advertising campaign and a treatment advertising campaign, where the control (A) and treatment (B)received 2,000 impressions each. The control and treatment campaigns receive 1 and 6 clicks each respectively. Is the treatment campaign better (statistically significant)? Describe and show you calculations and make a recommendation.
+
+
+====================================================
+===  HW 14.3 Field-aware Factorization Machine  FFM test on detecting malicious Web sites
+
+Download the Spark libFM from https://github.com/zhengruifeng/spark-libFM
+
+
+Run the FFM code on the hdfs://ns1/whale-tmp/url_combined dataset 
+
+FFM sample code: https://github.com/zhengruifeng/spark-libFM/blob/master/src/main/scala/TestFM.scala
+
+on the following dataset:
+
+url_combined dataset is located at:
+
+ http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/url_combined.bz2
+
+
+Report the AWS cluster configuration that you used and how long in minutes and seconds it takes to complete this job. Discuss the differences in the two factorizations. 
+
+
+For some more background on the r detecting malicious Web sites dataset see the following:
+
+The long-term goal of this research (and this dataset) is to construct a real-time system that uses machine learning techniques to detect malicious URLs (spam, phishing, exploits, and so on). To this end, we have explored techniques that involve classifying URLs based on their lexical and host-based features, as well as online learning to process large numbers of examples and adapt quickly to evolving URLs over time.
+
+The data set consists of about 2.4 million URLs (examples) and 3.2 million features.
+A label of +1 corresponds to a malicious URL and -1 corresponds to a benign URL.
+An anonymized 120-day subset of our ICML-09 data set.
+Data is encoded in SVM-ligth form
+Attack Label, URLs-features, HostID/Address features
+
+E.g, there are 835,764 unique Hostname-based features T
+To implement these features, they  use a bag-of-words representation
+of tokens in the URL, where ‘/’, ‘?’, ‘.’, ‘=’, ‘-’,
+and ‘ ’ are delimiters. We distinguish tokens that appear in
+the hostname, path, the top-level domain (TLD), primary
+domain name (the domain name given to a registrar), and
+last token of the path (to capture file extensions). Thus,
+‘com’ in the TLD position of a URL would be a different
+token from ‘com’ in other parts of the URL. We also use
+the lengths of the hostname and the URL as features. 
+
+
+http://sysnet.ucsd.edu/projects/url/
+[JM09a]
+Justin Ma, Lawrence K. Saul, Stefan Savage, and Geoffrey M. Voelker. 
+Identifying suspicious URLs: An application of large-scale online learning. 
+In Proceedings of the Twenty Sixth International Conference on Machine Learning (ICML), pages 681-688, 2009.
+
+url
+
+Source: [JM09a] https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/ref.html#JM09a
+Preprocessing: The file "url_original.tar.bz2" contains a directory 121 days, in which the file "FeatureTypes" gives indices of real-valued features (other features are 0/1). The file "url_combined.bz2" combines all 121-day data into one file. See more details in this page.
+# of classes: 2
+# of data: 2,396,130
+# of features: 3,231,961
+Files:
+url_combined.bz2
+url_original.tar.bz2
+
+
+https://www.dropbox.com/s/yz8kcvzyyn4s7bb/url_combined.txt?dl=0
+
+
+====================================================
+===  HW 14.3.1  (OPTIONAL) Field-aware Factorization Machine  FFM comparison 
+
+Using the following training data (where each record is row consisting of a user, item, rating):
+
+   https://www.dropbox.com/s/04rvxpawxelo6b0/test.data.txt?dl=0
+ 
+Run the following Field-aware Factorization Machine test (note the data may need to be reformatted and one-hot-encoded for this code to work):
+
+     https://github.com/zhengruifeng/spark-libFM/blob/master/src/main/scala/TestFM.scala
+
+with k (number of factors in the parameter matrix) set to 4.
+
+What does this model predict for the following test set:
+
+user=3, item 7, rating=4
+user=1, item 2, rating=4
+user=6, item 3, rating=4
+user=7, item 4, rating=4
+
+Report the predictions for each example and the mean squared error (MSE).
+
+Using the ALS algorithm (MLlib), with rank = 4, repeat the above experiment using the following code snippet: 
+
+https://www.dropbox.com/s/vr3n41ngsnc8kqx/ALS-MLlib.ipynb?dl=0
+
+Report the predictions on the test set and the MSE. Discuss your results.
+
+
+
+====================================================
+===HW 14.4 Replicate Criteo Challenge winning solution
+
+Using the following as reference material (slides and code):
+
+3 Idiots’ Approach for Display Advertising Challenge, YuChin Juan, Yong Zhuang, and Wei-Sheng Chin, NTU CSIE MLGroup
+https://github.com/guestwalk/kaggle-2014-criteo 
+http://www.csie.ntu.edu.tw/~r01922136/kaggle-2014-criteo.pdf
+
+
+and the Criteo data: The data for this challenge is located at:
+
+Raw Data:  (Training, Validation and Test data)
+https://console.aws.amazon.com/s3/home?region=us-west-1#&bucket=criteo-dataset&prefix=rawdata/
+
+Hashed Data: Training, Validation and Test data in hash encoded (10,000 buckets) and sparse representation
+https://console.aws.amazon.com/s3/home?region=us-west-1#&bucket=criteo-dataset&prefix=processeddata/
+
+
+Replicate (as close as possible) the winning submission for the Criteo. I.e., adapt their 2 step-approach of 
+GBDT + Field-aware Factorization Machine (FFM). 
+
+Report the AWS cluster configuration that you used and how long in minutes and seconds it takes to complete this job.
+
+Report in tabular form and using heatmaps the AUC values (https://en.wikipedia.org/wiki/Receiver_operating_characteristic) for the Training, Validation, and Testing datasets.
+Report in tabular form and using heatmaps  the logLossTest for the Training, Validation, and Testing datasets.
+
+Dont forget to put a caption on your tables (above the table) and on your heatmap figures (put caption below figures) detailing the experiment associated with each table or figure (data, algorithm used, parameters and settings explored.
+
+Discuss the optimal setting to solve this problem  in terms of the following:
+-- Features
+-- Learning algortihm
+-- Spark cluster
+
+Justiy your recommendations based on your experimental results and cross reference with table numbers and figure numbers. Also highlight key results with annotations, both textual and line and box based, on your tables and graphs.
+
+
+==================END HW ==================
+============================================
