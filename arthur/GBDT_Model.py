@@ -48,7 +48,6 @@ def maaro(z):
     else:
         return(z,1)
 
-    
 #main GBDT function
 def run_GBDT(input_file,output_file,iterations):
     dataRDD=sc.textFile(input_file).map(lambda x: x.replace('\t',','))
@@ -77,18 +76,12 @@ def run_GBDT(input_file,output_file,iterations):
              categoricalFeaturesInfo={}, learningRate = 0.1, maxDepth = 7, maxBins = 2))
     
     sc.parallelize([model.toDebugString()]).coalesce(1).saveAsTextFile(output_file)  
-#     sc.textFile(model.toDebugString()).saveAsTextFile(output_file)  
-#     print type(str(model.toDebugString()))
-#     output = str(model.toDebugString())
-#     sc.textFile(output).take(1)
-
-
     
 #Execute code    
 if __name__== '__main__':
-    if len(sys.argv) < 3:
-        print >> sys.stderr, "Usage: page_rank <initialize sc ?> <input file> <output file> <damping factor> <number_of_iterations>"
-        exit(-1)
+#     if len(sys.argv) < 3:
+#         print >> sys.stderr, "Usage: page_rank <initialize sc ?> <input file> <output file> <damping factor> <number_of_iterations>"
+#         exit(-1)
 
     input_file = sys.argv[1]
     output_file = sys.argv[2]
