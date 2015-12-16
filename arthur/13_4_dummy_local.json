@@ -1,0 +1,13 @@
+{
+    "input_train"      : "dac_sample.txt",
+    "input_val"        : "None",
+    "input_test"       : "None",
+    "output_file"      : "13_4/output_dummy_local/",
+    "splitData"        : "True",
+    "hashData"         : "True",
+    "numHashBuckets"   : [1000],
+    "stepSize"         : [100],
+    "regParam"         : [1e-3],
+    "regType"          : "None",
+    "includeIntercept" : "True"
+}
